@@ -27,25 +27,19 @@ namespace task_1_maclaurin_forms
 
         public double Maclaurin2(double x, double e, ref int n)
         {
-            double Previous = 1, Sum = 1, Elem = 1;
+            double Sum = 1, Elem = 1;
 
             double PoweredX = Math.Pow(x, 2);
             int i = 0;
-            while (true)
+            while (Math.Abs(Elem) > e)
             {
-                Elem = (Previous * (-1) * PoweredX) / ((2 * i + 2) * (2 * i + 3));
-                if (Math.Abs(Elem) > e)
-                {
-                    Sum += Elem;
-                    Previous = Elem;
-                    i++;
-                }
-                else
-                {
-                    n = i;
-                    return Sum;
-                }
+                Sum += Elem; 
+                i++;
+                Elem = (Elem * (-1) * PoweredX) / ((2 * i + 2) * (2 * i + 3));
             }
+
+            n = i;
+            return Sum;
         }
     }
 }
